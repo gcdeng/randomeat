@@ -20,23 +20,42 @@ class App extends Component {
   }
   
   async componentDidMount(){
-    // get user's location
-    let userLocation = await getUserLocation();
-    this.setState({
-      userLocation
-    });
-    console.log('this.state.userLocation', this.state.userLocation);
+    try {
+      // get user's location
+      let userLocation = await getUserLocation();
+      this.setState({
+        userLocation
+      });
+      console.log('this.state.userLocation', this.state.userLocation);
+    } catch (error) {
+      console.error(error);
+      this.setState({
+        userLocation: 'not found'
+      });
+      return;
+    }
 
-    // get nearbysearch results
-    let candidates = await getNearbySearchResults(this.state.userLocation);
-    console.log('candidates: ', candidates);
+    try {
+      // get nearbysearch results
+      let candidates = await getNearbySearchResults(this.state.userLocation);
+      console.log('candidates: ', candidates);
 
-    // get a random result
-    let result = candidates[getRandomNumber(candidates.length)];
-    this.setState({
-      result
-    });
-    console.log('this.state.result', this.state.result);
+      // get a random result
+      if(candidates.length>0){
+        let result = candidates[getRandomNumber(candidates.length)];
+        this.setState({
+          result
+        });
+        console.log('this.state.result', this.state.result);
+      } else {
+        throw new Error('result not found');
+      }
+    } catch (error) {
+      console.error(error);
+      this.setState({
+        result: 'not found'
+      });
+    }
   }
 
   render(){
