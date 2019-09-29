@@ -4,7 +4,7 @@ const getCurrentPosition = (options={}) => {
     });
 };
 
-const getUserPosition = async () => {
+const getUserLocation = async () => {
     const options = {maximumAge:60000, timeout:60000};
     try {
         if(!navigator.geolocation){
@@ -25,4 +25,4 @@ const getUserPosition = async () => {
     }
 };
 
-export default getCurrentPosition;
+export default getUserLocation;

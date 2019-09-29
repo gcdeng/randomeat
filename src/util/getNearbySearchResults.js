@@ -7,7 +7,7 @@ const getNearbySearchResults = (location) => {
       let request = {
         location: userLocation,
         radius: 1000, //The maximum allowed radius is 50000 meters.
-        type: ['restaurant', "food"],
+        type: ['restaurant', "food", "cafe"],
         language: 'zh-TW'
       }
       let allResults = [];
