@@ -1,0 +1,57 @@
+.Place {
+    padding: 20px;
+    height: 35vh;
+    background-image: url(https://maps.googleapis.com/maps/api/place/js/PhotoService.GetPhoto?1sCmRaA…&2e1&callback=none&key=AIzaSyAwTahifvGw_EO0swGwH1RsTqHj6S4LvcM&token=12909);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.wrapper{
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff9c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: #000;
+    font-size: 18px;
+    font-weight: 500;
+}
+.name {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.name a {
+    color: #000;
+}
+.info > div{
+    margin-bottom: 15px;
+}
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rating .number {
+    margin-right: 10px;
+}
+.fa-star{
+    width: 20px !important;
+}
+.star-rating{
+    color: #fff;
+    width: 100px;
+    position: relative;
+}
+.star-rating-top{
+    color: #00ffdcdb;
+    position: absolute;
+    overflow: hidden;
+    display: flex;
+    top: 1px;
+}

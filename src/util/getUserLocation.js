@@ -11,8 +11,7 @@ const getUserLocation = async () => {
             throw new Error('Browser doesn\'t support Geolocation.');
         }
         let position = await getCurrentPosition(options);
-        let {latitude, longitude} = position.coords;
-        return {latitude, longitude};
+        return {lat: position.coords.latitude, lng: position.coords.longitude};
     } catch (e) {
         /** 
          * three error case:

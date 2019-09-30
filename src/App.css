@@ -20,3 +20,20 @@
 .App-link {
   color: #09d3ac;
 }
+
+#map {
+  height: 60vh;
+}
+
+header {
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header .title{
+  font-size: 24px;
+  color: #00ffdcdb;
+  font-weight: 500;
+}
