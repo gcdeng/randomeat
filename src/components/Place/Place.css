@@ -19,7 +19,7 @@
     border: 1px solid transparent;
     border-radius: 5px;
     color: #000;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
 }
 .name {
@@ -30,7 +30,7 @@
     color: #000;
 }
 .info > div{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 .rating {
     display: flex;
@@ -44,7 +44,7 @@
     width: 20px !important;
 }
 .star-rating{
-    color: #fff;
+    color: #ececec;
     width: 100px;
     position: relative;
 }
