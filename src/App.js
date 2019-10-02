@@ -5,7 +5,7 @@ import getRandomNumber from './util/getRandomNumber';
 import Place from './components/Place/Place';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDice, faBars} from '@fortawesome/free-solid-svg-icons';
-import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
+import { Input, Header, Icon, Image, Menu, Segment, Sidebar, Dropdown, Rating } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 const google = window.google;
@@ -24,12 +24,14 @@ class App extends Component {
     this.map = null;
   }
   state = {
+    // userLocation: mockLocation,
+    // result: mockResult,
     userLocation: null,
     result: null,
-    searchRadius: 1000,
     sideBarVisible: false,
-    // userLocation: mockLocation,
-    // result: mockResult
+    type: 'restaurant',
+    rating: 0,
+    searchRadius: 1000,
   }
 
   updateResult = async () => {
@@ -45,10 +47,18 @@ class App extends Component {
         map,
         location: this.state.userLocation, 
         radius: this.state.searchRadius,
-        type: ['restaurant']
+        type: [this.state.type]
       });
-      console.log('candidates: ', candidates);
 
+      // filter
+      if(this.state.rating>0){
+        let rating = this.state.rating;
+        candidates = candidates.filter(candidate=>{
+          return candidate.rating>=rating;
+        });
+      }
+      
+      console.log('candidates: ', candidates);
       if (candidates.length===0) {
         throw new Error('result not found');
       }
@@ -88,11 +98,11 @@ class App extends Component {
     });
     // set infowindow
     let link = `https://www.google.com/maps/search/?api=1&query=${result.name}&query_place_id=${result.place_id}`;
+    
     if(this.infowindow){
       this.infowindow.close();
-      this.infowindow = null;
     }
-    this.infowindow = new google.maps.InfoWindow({
+    let infowindow = new google.maps.InfoWindow({
       content: `
       <div>${result.name}</div>
       <div>${result.rating}</div>
@@ -102,9 +112,15 @@ class App extends Component {
       `,
       position: result.geometry.location
     });
-    this.infowindow.open(map, resultMarker);
+    infowindow.open(map, resultMarker);
+    this.infowindow = infowindow;
     resultMarker.addListener('click', ()=>{
-      this.infowindow.open(map, resultMarker);
+      if(infowindow.getMap()!=null){
+        infowindow.close();
+      } else {
+        infowindow.open(map, resultMarker);
+        infowindow.setZIndex(999);
+      }
     });
   }
   
@@ -157,43 +173,95 @@ class App extends Component {
     await this.updateResult();
   }
 
-  toggleSideBar = () => {
-    this.setState((state)=>({
-      sideBarVisible: !state.sideBarVisible
-    }));
+  setSideBarVisible = (visible) => {
+    this.setState({
+      sideBarVisible: visible
+    });
   }
 
   render(){
+    let options = [
+      {
+        key: 0,
+        text: 'restaurant',
+        value: 'restaurant',
+      },
+      {
+        key: 1,
+        text: 'cafe',
+        value: 'cafe',
+      },
+    ];
+    let handleTypeSelection = (e, data) => {
+      this.setState({
+        type: data.value
+      });
+    }
+    let handleRadiusChange = (e, o) => {
+      console.log(e, o);
+      this.setState({
+        searchRadius: o.value
+      });
+    }
+    let handleRate = (e, {rating, maxRating}) => {
+      this.setState({
+        rating
+      });
+    }
+    
     return (
       <div className="App">
           <Sidebar
+            className="sidebar-menu"
             as={Menu}
             animation='overlay'
-            icon='labeled'
-            inverted
-            onHide={() => this.toggleSideBar()}
+            onHide={() => this.setSideBarVisible(false)}
             vertical
             visible={this.state.sideBarVisible}
             width='thin'
           >
-            <Menu.Item as='a'>
-              <Icon name='home' />
-              Home
+            <FontAwesomeIcon 
+            className="icon bars" 
+            icon={faBars} 
+            onClick={()=>this.setSideBarVisible(false)}/>
+            
+            <Menu.Item>
+              <div className="text">Type</div>
+              <Dropdown 
+                fluid 
+                selection 
+                options = {options}
+                value = {this.state.type}
+                onChange = {handleTypeSelection}></Dropdown>
             </Menu.Item>
-            <Menu.Item as='a'>
-              <Icon name='gamepad' />
-              Games
+            <Menu.Item>
+              {/* <Icon name='gamepad' /> */}
+              <div className="text">Rating</div>
+              <Rating 
+                className="star-rating"
+                icon='star' 
+                defaultRating={0} 
+                maxRating={5} 
+                clearable
+                size="large"
+                onRate={handleRate} />
             </Menu.Item>
-            <Menu.Item as='a'>
-              <Icon name='camera' />
-              Channels
-            </Menu.Item>
+            {/* <Menu.Item>
+              Radius: {this.state.searchRadius} meters
+              <Input
+                type='range'
+                min={1000}
+                max={50000}
+                value={this.state.searchRadius}
+                onChange={handleRadiusChange}
+              />
+            </Menu.Item> */}
           </Sidebar>
           <header>
-            <div onClick={this.toggleSideBar}>
+            <div onClick={()=>this.setSideBarVisible(true)}>
               <FontAwesomeIcon className="icon bars" icon={faBars} />
             </div>
-            <div className="title">randomlife</div>
+            <div className="title">randomEat</div>
             <div onClick={async _ => await this.updateResult()}>
               <FontAwesomeIcon className="icon dice" icon={faDice} />
             </div>
@@ -201,7 +269,7 @@ class App extends Component {
           {this.state.userLocation?
               this.state.result?
                 <Place data={this.state.result}/>:
-                'Finding restaurant...':
+                `Finding ${this.state.type}...`:
               'Finding location...'}
           <div id="map"></div>
       </div>

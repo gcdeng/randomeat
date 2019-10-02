@@ -44,12 +44,12 @@
     width: 20px !important;
 }
 .star-rating{
-    color: #ececec;
+    color: rgb(217, 217, 217);
     width: 100px;
     position: relative;
 }
 .star-rating-top{
-    color: #00ffdcdb;
+    color: #3bedd5;
     position: absolute;
     overflow: hidden;
     display: flex;

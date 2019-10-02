@@ -18,7 +18,7 @@
 }
 
 .App-link {
-  color: #09d3ac;
+  color: #3bedd5;
 }
 
 #map {
@@ -35,12 +35,45 @@ header {
 
 header .title{
   font-size: 24px;
-  color: #00ffdcdb;
+  color: #3bedd5;
   font-weight: 500;
 }
 
 header .icon {
   font-size: 22px;
-  color: #00b59cdb;
+  color: #3bedd5;
   cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb { 
+  border: 1px solid silver;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.sidebar-menu {
+  border: none !important;
+  padding-top: 5vh;
+}
+.sidebar-menu .fa-bars{
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  font-size: 22px;
+  color: #3bedd5;
+  cursor: pointer;
+}
+.sidebar-menu .item > div.text{
+  margin-bottom: 10px;
+}
+
+.sidebar-menu .ui.star.rating .icon {
+  font-size: 20px;
+}
+.sidebar-menu .ui.star.rating .active.icon {
+  color: #3bedd5!important;
+  text-shadow: none !important;
+}
+.sidebar-menu .star-rating > i:focus{ 
+  outline: none;
 }
