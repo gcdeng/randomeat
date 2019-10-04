@@ -22,5 +22,6 @@
   "display": "standalone",
   "theme_color": "#3bedd5",
   "background_color": "#ffffff",
-  "content_security_policy": "script-src 'self' https://maps.googleapis.com/; style-src 'self' 'unsafe-inline'"
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com/; style-src 'self' 'unsafe-inline'",
+  "orientation": "portrait"
 }
