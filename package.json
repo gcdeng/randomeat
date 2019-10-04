@@ -2,6 +2,7 @@
   "name": "random-life",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://gcdeng.bitbucket.io/randomeat/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
