@@ -175,7 +175,7 @@ class App extends Component {
     new google.maps.Marker({
       position: userLocation, 
       map: map,
-      icon: '/street-view-solid.svg'
+      icon: './street-view-solid.svg'
     });
 
     await this.updateResult();
