@@ -28,7 +28,7 @@ function Place(props){
         imageSrc = photos[0].getUrl();
         style.backgroundImage = `url(${imageSrc})`;
     } else {
-        style.backgroundColor = '#000';
+        style.backgroundColor = '#080808';
     }
     return (
         <div className="Place">

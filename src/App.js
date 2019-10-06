@@ -22,6 +22,7 @@ class App extends Component {
     super();
     this.infowindow = null;
     this.map = null;
+    this.circle = null;
   }
   state = {
     // userLocation: mockLocation,
@@ -31,7 +32,7 @@ class App extends Component {
     sideBarVisible: false,
     type: 'restaurant',
     rating: 0,
-    searchRadius: 1000,
+    searchRadius: 500,
   }
 
   updateResult = async () => {
@@ -40,13 +41,20 @@ class App extends Component {
     this.setState({
       result
     });
-
+    let radius = this.circle.getRadius() || this.state.searchRadius;
+    let location = this.state.userLocation;
+    if(this.circle.getCenter()) {
+      location = {
+        lat: this.circle.getCenter().lat(),
+        lng: this.circle.getCenter().lng()
+      }
+    }
     try {
       // get nearbysearch results
       let candidates = await getNearbySearchResults({
         map,
-        location: this.state.userLocation, 
-        radius: this.state.searchRadius,
+        location, 
+        radius,
         type: [this.state.type]
       });
 
@@ -144,11 +152,11 @@ class App extends Component {
 
     let map = new google.maps.Map(document.getElementById('map'), {
       center: userLocation, 
-      zoom: 14
+      zoom: 15
     });
     this.map = map;
     // zone circle
-    new google.maps.Circle({
+    this.circle = new google.maps.Circle({
       strokeColor: '#03fcca',
       strokeOpacity: 0.8,
       strokeWeight: 2,
@@ -167,7 +175,7 @@ class App extends Component {
     new google.maps.Marker({
       position: userLocation, 
       map: map,
-      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+      icon: '/street-view-solid.svg'
     });
 
     await this.updateResult();
