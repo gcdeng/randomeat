@@ -65,7 +65,7 @@
     position: absolute;
     overflow: hidden;
     display: flex;
-    top: 2px;
+    top: 3px;
 }
 .red {
     color: #d32a35;
