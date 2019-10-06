@@ -2,6 +2,10 @@
     height: 35vh;
     position: relative;
     background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
 }
 .blur-background{
     background-size: cover;
@@ -9,10 +13,11 @@
     background-repeat: no-repeat;
     height: 100%;
     width: 100%;
-    filter: blur(1.5px);
+    filter: blur(2px);
     opacity: .8;
     position: absolute;
     z-index: 1;
+    top: -2px;
 }
 .content {
     padding: 20px;

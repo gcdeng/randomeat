@@ -183,12 +183,12 @@ class App extends Component {
     let options = [
       {
         key: 0,
-        text: 'restaurant',
+        text: 'Restaurant',
         value: 'restaurant',
       },
       {
         key: 1,
-        text: 'cafe',
+        text: 'Cafe',
         value: 'cafe',
       },
     ];
@@ -266,12 +266,12 @@ class App extends Component {
               <FontAwesomeIcon className="icon dice" icon={faDice} />
             </div>
           </header>
-          {this.state.userLocation?
-              this.state.result?
-                <Place data={this.state.result}/>:
-                `Finding ${this.state.type}...`:
-              'Finding location...'}
-          <div id="map"></div>
+          <main>
+            <Place 
+              result={this.state.result}
+              type={this.state.userLocation?this.state.type:'location'}/>
+            <div id="map"></div>
+          </main>
       </div>
     );
   }

@@ -1,8 +1,17 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { Loader } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 import './Place.css';
 function Place(props){
+    if(!props.result) {
+        return (
+            <div className="Place">
+                <Loader active>Finding {props.type}</Loader>
+            </div>
+        )
+    }
     let {
         name,
         rating,
@@ -11,7 +20,7 @@ function Place(props){
         opening_hours,
         photos,
         place_id
-    } = props.data;
+    } = props.result;
     let link = `https://www.google.com/maps/search/?api=1&query=${name}&query_place_id=${place_id}`;
     let imageSrc = '';
     let style = {};
