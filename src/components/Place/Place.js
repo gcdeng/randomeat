@@ -18,18 +18,18 @@ function Place(props){
     if(photos.length>0 && photos[0].getUrl) {
         imageSrc = photos[0].getUrl();
         style.backgroundImage = `url(${imageSrc})`;
+    } else {
+        style.backgroundColor = '#000';
     }
     return (
-        <div 
-            className="Place"
-            style={style}>
-            <div className="wrapper">
-                <div className="name">
-                    <a
-                    href={link} 
-                    target="_blank" 
-                    rel="noopener noreferrer">{name}</a>
-                </div>
+        <div className="Place">
+            <div className="blur-background" style={style}></div>
+            <div className="content">
+                <a
+                className="name"
+                href={link} 
+                target="_blank" 
+                rel="noopener noreferrer">{name}</a>
                 <div className="info">
                     <div className="rating">
                         {/* <div className="number">{rating}</div> */}
@@ -46,17 +46,14 @@ function Place(props){
                     <div>{vicinity}</div>
                     {
                         opening_hours!=={}?
-                        <div style={{
-                            color: opening_hours.open_now?'green':'red'
-                        }}>{opening_hours.open_now? 'Open':'Closed'}</div>
+                        <div 
+                        className={opening_hours.open_now?'green':'red'}>
+                        {opening_hours.open_now? 'Open':'Closed'}
+                        </div>
                         : ''
                     }
                 </div>
             </div>
-            
-            {/* <div className="image-wrapper">
-                {imageSrc?<img src={imageSrc} alt="place_photo"/>:''}
-            </div> */}
         </div>
     );
 }
