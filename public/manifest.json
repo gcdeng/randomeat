@@ -19,9 +19,9 @@
     }
   ],
   "start_url": ".",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#3bedd5",
-  "background_color": "#ffffff",
+  "background_color": "#3bedd5",
   "content_security_policy": "script-src 'self' https://maps.googleapis.com/; style-src 'self' 'unsafe-inline'",
   "orientation": "portrait"
 }
