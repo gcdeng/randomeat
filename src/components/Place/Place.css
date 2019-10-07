@@ -4,11 +4,16 @@
 }
 .cover-wrapper{
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: #000;
 }
 .blur-background{
+    position: absolute;
+    top: 0;
+    left: 0;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
