@@ -5,7 +5,7 @@ import getRandomNumber from './util/getRandomNumber';
 import Place from './components/Place/Place';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDice, faBars} from '@fortawesome/free-solid-svg-icons';
-import { Menu, Sidebar, Dropdown, Rating } from 'semantic-ui-react';
+import { Button, Menu, Sidebar, Dropdown, Rating } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 const google = window.google;
@@ -132,8 +132,8 @@ class App extends Component {
       }
     });
   }
-  
-  async componentDidMount(){
+
+  setLocation = async () => {
     try {
       // get user's location
       this.setState({
@@ -177,7 +177,10 @@ class App extends Component {
       map: map,
       icon: './street-view-solid.svg'
     });
-
+  }
+  
+  async componentDidMount(){
+    await this.setLocation();
     await this.updateResult();
   }
 
@@ -205,16 +208,26 @@ class App extends Component {
         type: data.value
       });
     }
-    // let handleRadiusChange = (e, o) => {
-    //   console.log(e, o);
-    //   this.setState({
-    //     searchRadius: o.value
-    //   });
-    // }
+    
     let handleRate = (e, {rating, maxRating}) => {
       this.setState({
         rating
       });
+    }
+
+    let handleReset = async () => {
+      this.infowindow = null;
+      this.map = null;
+      this.circle = null;
+      this.setState({
+        userLocation: null,
+        result: null,
+        sideBarVisible: false,
+        type: 'restaurant',
+        rating: 0,
+      });
+      await this.setLocation();
+      await this.updateResult();
     }
     
     return (
@@ -248,22 +261,16 @@ class App extends Component {
               <Rating 
                 className="star-rating"
                 icon='star' 
-                defaultRating={0} 
                 maxRating={5} 
                 clearable
                 size="large"
+                rating={this.state.rating}
                 onRate={handleRate} />
             </Menu.Item>
-            {/* <Menu.Item>
-              Radius: {this.state.searchRadius} meters
-              <Input
-                type='range'
-                min={1000}
-                max={50000}
-                value={this.state.searchRadius}
-                onChange={handleRadiusChange}
-              />
-            </Menu.Item> */}
+            <Button 
+            content='Reset' 
+            className="reset-button" 
+            onClick={async ()=> await handleReset()}/>
           </Sidebar>
           <header>
             <div onClick={()=>this.setSideBarVisible(true)}>

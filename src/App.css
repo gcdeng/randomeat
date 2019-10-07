@@ -81,3 +81,8 @@ input[type="range"]::-webkit-slider-thumb {
 .sidebar-menu .star-rating > i:focus{ 
   outline: none;
 }
+.sidebar-menu .reset-button {
+  position: absolute;
+  bottom: 20px;
+  left: 25%;
+}
