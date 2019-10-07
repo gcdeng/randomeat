@@ -28,11 +28,13 @@ function Place(props){
         imageSrc = photos[0].getUrl();
         style.backgroundImage = `url(${imageSrc})`;
     } else {
-        style.backgroundColor = '#080808';
+        style.backgroundColor = 'rgb(12, 84, 71)';
     }
     return (
         <div className="Place">
-            <div className="blur-background" style={style}></div>
+            <div className="cover-wrapper">
+                <div className="blur-background" style={style}></div>
+            </div>
             <div className="content">
                 <a
                 className="name"
