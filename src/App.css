@@ -70,6 +70,10 @@ input[type="range"]::-webkit-slider-thumb {
 .sidebar-menu .ui.star.rating .icon {
   font-size: 20px;
 }
+.sidebar-menu .ui.star.rating .selected.icon {
+  color: #3bedd5!important;
+  text-shadow: none !important;
+}
 .sidebar-menu .ui.star.rating .active.icon {
   color: #3bedd5!important;
   text-shadow: none !important;

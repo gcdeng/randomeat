@@ -51,7 +51,8 @@ class App extends Component {
     }
     try {
       // get nearbysearch results
-      let candidates = await getNearbySearchResults({
+      let candidates = [];
+      candidates = await getNearbySearchResults({
         map,
         location, 
         radius,

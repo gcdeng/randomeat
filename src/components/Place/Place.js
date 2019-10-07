@@ -12,13 +12,20 @@ function Place(props){
             </div>
         )
     }
+    if(props.result==='not found') {
+        return (
+            <div className="Place">
+                Not found
+            </div>
+        )
+    }
     let {
         name,
         rating,
         user_ratings_total,
         vicinity,
         opening_hours,
-        photos,
+        photos=[],
         place_id
     } = props.result;
     let link = `https://www.google.com/maps/search/?api=1&query=${name}&query_place_id=${place_id}`;
