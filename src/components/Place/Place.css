@@ -41,9 +41,15 @@
 .name {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #fff !important;
+    color: #fff;
     font-weight: 700;
     line-height: 1.5;
+}
+.name:hover {
+    color: #fff;
+}
+.name:active {
+    color: #3bedd5;
 }
 .info {
     font-size: 16px;

@@ -4,8 +4,8 @@ import getNearbySearchResults from './util/getNearbySearchResults';
 import getRandomNumber from './util/getRandomNumber';
 import Place from './components/Place/Place';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDice, faBars} from '@fortawesome/free-solid-svg-icons';
-import { Button, Menu, Sidebar, Dropdown, Rating } from 'semantic-ui-react';
+import { faRedoAlt, faDice, faBars} from '@fortawesome/free-solid-svg-icons';
+import { Menu, Sidebar, Dropdown, Rating } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 const google = window.google;
@@ -267,16 +267,20 @@ class App extends Component {
                 rating={this.state.rating}
                 onRate={handleRate} />
             </Menu.Item>
-            <Button 
-            content='Reset' 
-            className="reset-button" 
-            onClick={async ()=> await handleReset()}/>
+            <FontAwesomeIcon 
+            className="icon reset-button" 
+            icon={faRedoAlt} 
+            onClick={async () => await handleReset()}/>
           </Sidebar>
           <header>
             <div onClick={()=>this.setSideBarVisible(true)}>
               <FontAwesomeIcon className="icon bars" icon={faBars} />
             </div>
-            <div className="title">randomeat</div>
+            <div 
+              className="title"
+              onClick={async () => await handleReset()}>
+              randomeat
+            </div>
             <div onClick={async _ => await this.updateResult()}>
               <FontAwesomeIcon className="icon dice" icon={faDice} />
             </div>
