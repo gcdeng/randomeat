@@ -83,7 +83,7 @@ class App extends Component {
         result: {
           name: result.name,
           place_id: result.place_id,
-          rating: result.rating || '',
+          rating: Math.floor(parseFloat(result.rating)*10)/10 || '',
           user_ratings_total: result.user_ratings_total || '',
           vicinity: result.vicinity || '',
           photos: result.photos || [],
@@ -114,9 +114,8 @@ class App extends Component {
     let infowindow = new google.maps.InfoWindow({
       content: `
       <div>${result.name}</div>
-      <div>${result.rating}</div>
+      <div>${this.state.result.rating}</div>
       <div>${result.vicinity}</div>
-      <div>${result.opening_hours? result.opening_hours.open_now?'Open':'Closed':''}</div>
       <a href="${link}" target="_blank" rel="noopener noreferrer">View on Google Maps</a>
       `,
       position: result.geometry.location
