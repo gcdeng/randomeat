@@ -2,7 +2,6 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { Loader } from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
 import './Place.css';
 function Place(props){
     if(!props.result) {

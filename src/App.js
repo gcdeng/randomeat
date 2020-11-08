@@ -6,7 +6,6 @@ import Place from './components/Place/Place';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedoAlt, faDice, faBars} from '@fortawesome/free-solid-svg-icons';
 import { Menu, Sidebar, Dropdown, Rating } from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 const google = window.google;
 
