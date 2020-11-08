@@ -32,15 +32,28 @@ class App extends Component {
     this.setState({
       result
     });
-    let radius = this.circle.getRadius() || defaultSearchRadius;
-    radius = radius<=50000? radius:50000;
-    let location = this.state.userLocation;
-    if(this.circle.getCenter()) {
-      location = {
-        lat: this.circle.getCenter().lat(),
-        lng: this.circle.getCenter().lng()
-      }
+    
+    let radius = defaultSearchRadius;
+    try {
+      radius = this.circle.getRadius();
+    } catch (error) {
+      console.error(error);
     }
+    radius = radius<=50000? radius:50000;
+
+    let location = this.state.userLocation;
+    try {
+      let circleCenter = this.circle.getCenter();
+      if(circleCenter) {
+        location = {
+          lat: circleCenter.lat(),
+          lng: circleCenter.lng()
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
     try {
       // get nearbysearch results
       let candidates = [];
@@ -59,7 +72,7 @@ class App extends Component {
         });
       }
       
-      console.log('candidates: ', candidates);
+      // console.log('candidates: ', candidates);
       if (candidates.length===0) {
         throw new Error('result not found');
       }
@@ -83,7 +96,7 @@ class App extends Component {
           geometry: result.geometry || {}
         }
       });
-      console.log('this.state.result', this.state.result);
+      // console.log('this.state.result', this.state.result);
     } catch (error) {
       console.error(error);
       this.setState({
@@ -130,7 +143,7 @@ class App extends Component {
       this.setState({
         userLocation: await getUserLocation()
       });
-      console.log('this.state.userLocation', this.state.userLocation);
+      // console.log('this.state.userLocation', this.state.userLocation);
     } catch (error) {
       console.error(error);
       this.setState({
