@@ -1,6 +1,6 @@
 # randomeat
 
-![demo](./demo.gif)
+<img src="./demo.gif" height="500"/>
 
 從圓圈區域中隨機找出一家餐廳，可拖曳/縮放圓圈、篩選餐廳類型、星星評分。
 
